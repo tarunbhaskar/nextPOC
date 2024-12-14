@@ -20,13 +20,11 @@ export default function CardDetailsPage() {
     }, [params, router]);
 
     const handleAdd = () => {
-        alert('Add feature clicked');
-        // Redirect to Add Form or implement functionality
+        router.push(`/dashboard/${params.id}/add`);
     };
 
     const handleEdit = () => {
-        alert('Edit feature clicked');
-        // Redirect to Edit Form or implement functionality
+        router.push(`/dashboard/${params.id}/edit`);
     };
 
     const handleDelete = () => {
@@ -46,23 +44,9 @@ export default function CardDetailsPage() {
             <div className="details-card">
                 {/* Action Icons */}
                 <div className="actions">
-                    <button onClick={() => router.push(`/dashboard/${params.id}/add`)} title="Add">+</button>
-                    <button onClick={() => router.push(`/dashboard/${params.id}/edit`)} title="Edit">✎</button>
-                    <button
-                        onClick={() => {
-                            if (confirm('Are you sure you want to delete this item?')) {
-                                fetch(`/api/dashboard/${params.id}`, { method: 'DELETE' })
-                                    .then((res) => {
-                                        if (res.ok) router.push('/dashboard');
-                                    })
-                                    .catch(() => alert('Failed to delete item.'));
-                            }
-                        }}
-                        className="delete"
-                        title="Delete"
-                    >
-                        🗑
-                    </button>
+                    <button onClick={handleAdd} title="Add">+</button>
+                    <button onClick={handleEdit} title="Edit">✎</button>
+                    <button onClick={handleDelete} className="delete" title="Delete">🗑</button>
                 </div>
 
                 {/* Card Image */}

@@ -7,7 +7,7 @@ export default function HomePage() {
             {/* Header Section */}
             <div className="home-header">
                 <h1>Welcome to the Vendor Management Platform</h1>
-                <p>Your gateway to exclusive features and opportunities. Whether you're a business or an individual, we've got something for everyone.</p>
+                <p>Your gateway to exclusive features and opportunities. Whether you&apos;re a business or an individual, we have got something for everyone.</p>
             </div>
 
             {/* Features Section */}
