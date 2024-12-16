@@ -8,7 +8,7 @@ export default function DashboardPage() {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [quantities, setQuantities] = useState({});
+   // const [quantities, setQuantities] = useState({});
     const router = useRouter();
 
     useEffect(() => {
@@ -22,7 +22,7 @@ export default function DashboardPage() {
                 data.cards.forEach((card) => {
                     initialQuantities[card.id] = 1; // Default quantity is 1
                 });
-                setQuantities(initialQuantities);
+               // setQuantities(initialQuantities);
             })
             .catch((err) => console.error(err));
     }, []);
@@ -42,9 +42,6 @@ export default function DashboardPage() {
         }
     }, [searchTerm, data]);
 
-    // const handleQuantityChange = (id, value) => {
-    //     setQuantities((prev) => ({ ...prev, [id]: value }));
-    // };
 
     return (
         <div className="dashboard-container">
