@@ -1,0 +1,77 @@
+.orders-container {
+    padding: 2rem;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #6a11cb, #2575fc); /* Vibrant gradient background */
+    color: white; /* White text for contrast */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.order-list {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 2rem;
+}
+
+.order-item {
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 1rem;
+    color: #333; /* Dark text for contrast */
+}
+
+.order-item h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.order-item p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.order-item button {
+    background: #ff4d4d; /* Red button for remove */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.order-item button:hover {
+    background: #d32f2f; /* Darker red on hover */
+}
+
+.order-total {
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333; /* Dark text for contrast */
+}
+
+.order-total button {
+    margin-top: 1rem;
+    background: #6a11cb; /* Blue button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.order-total button:hover {
+    background: #4e0ea7; /* Darker blue on hover */
+}

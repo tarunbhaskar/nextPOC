@@ -71,23 +71,12 @@ export default function DashboardPage() {
                         <img src={card.image} alt={card.title} />
                         <h2>{card.title}</h2>
                         <p>{card.description}</p>
-                        <div className="card-details">
-                            <div className="quantity">
-                                <label>Qty:</label>
-                                <input
-                                    type="number"
-                                    min="1"
-                                    value={quantities[card.id]}
-                                    onChange={(e) =>
-                                        handleQuantityChange(card.id, e.target.value)
-                                    }
-                                />
-                            </div>
-                            <div className="price">${card.price}/unit</div>
-                        </div>
+                        <div className="price">${card.price}/unit</div>
+                        <div className="quantity">Quantity: {card.quantity}</div> {/* Display quantity */}
                     </div>
                 ))}
             </div>
+
         </div>
     );
 }

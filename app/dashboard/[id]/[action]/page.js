@@ -2,20 +2,22 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import { useCart } from '../../../context/CartContext';
 import '../../../styles/form.css';
 
 export default function ActionPage() {
-    const params = useParams(); // Access dynamic [id] and [action]
+    const params = useParams();
     const router = useRouter();
-    const [quantity, setQuantity] = useState(1);
-    const [price, setPrice] = useState(0);
-    const [itemDetails, setItemDetails] = useState(null);
+    const { addToCart } = useCart();
 
     const isEdit = params.action === 'edit';
+    const [itemDetails, setItemDetails] = useState(null);
+    const [quantity, setQuantity] = useState(1);
+    const [price, setPrice] = useState(0);
 
     useEffect(() => {
+        // Fetch item details for "edit" or initialize for "add"
         if (isEdit) {
-            // Fetch current item details for editing
             fetch(`/api/dashboard/${params.id}`)
                 .then((res) => res.json())
                 .then((data) => {
@@ -23,9 +25,32 @@ export default function ActionPage() {
                     setQuantity(data.quantity);
                     setPrice(data.price);
                 })
-                .catch(() => alert('Failed to load item details.'));
+                .catch(() => {
+                    alert('Failed to fetch item details.');
+                    router.push('/dashboard');
+                });
+        } else {
+            setItemDetails({ title: '', description: '' }); // Default for "add"
         }
-    }, [params.id, isEdit]);
+    }, [params.id, isEdit, router]);
+
+    const handleAddToCart = () => {
+        if (quantity <= 0) {
+            alert('Please enter a valid quantity.');
+            return;
+        }
+
+        const newItem = {
+            id: params.id,
+            title: itemDetails.title || 'New Item',
+            quantity,
+            price,
+        };
+
+        addToCart(newItem);
+        alert('Item added to cart!');
+        router.push('/orders'); // Navigate to the Orders Page
+    };
 
     const handleSubmit = () => {
         const method = isEdit ? 'PUT' : 'POST';
@@ -47,8 +72,8 @@ export default function ActionPage() {
             .catch(() => alert('Failed to submit.'));
     };
 
-    if (isEdit && !itemDetails) {
-        return <div>Loading...</div>;
+    if (!itemDetails) {
+        return <div>Loading item details...</div>;
     }
 
     return (
@@ -62,26 +87,15 @@ export default function ActionPage() {
                 </button>
                 <h2 className="form-header">{isEdit ? 'Edit Item' : 'Add Item'}</h2>
 
-                {isEdit && (
-                    <>
-                        <label>Title:</label>
-                        <input type="text" value={itemDetails?.title || ''} readOnly />
-
-                        <label>Description:</label>
-                        <input
-                            type="text"
-                            value={itemDetails?.description || ''}
-                            readOnly
-                        />
-                    </>
-                )}
+                <label>Title:</label>
+                <input type="text" value={itemDetails.title} readOnly={!isEdit} />
 
                 <label>Quantity:</label>
                 <input
                     type="number"
                     min="1"
                     value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
+                    onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
                 />
 
                 <label>Price per unit:</label>
@@ -89,12 +103,19 @@ export default function ActionPage() {
                     type="number"
                     min="0"
                     value={price}
-                    onChange={(e) => setPrice(e.target.value)}
+                    onChange={(e) => setPrice(parseFloat(e.target.value))}
                 />
 
-                <button onClick={handleSubmit}>
-                    {isEdit ? 'Update Item' : 'Add Item'}
-                </button>
+                <div className="action-buttons">
+                    {!isEdit && (
+                        <button onClick={handleAddToCart}>Add to Cart</button>
+                    )}
+
+                    {isEdit && (
+                        <button onClick={handleAddToCart}>update Cart</button>
+                    )}
+
+                </div>
             </div>
         </div>
     );
