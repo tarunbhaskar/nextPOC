@@ -52,25 +52,25 @@ export default function ActionPage() {
         router.push('/orders'); // Navigate to the Orders Page
     };
 
-    const handleSubmit = () => {
-        const method = isEdit ? 'PUT' : 'POST';
-        const url = `/api/dashboard/${params.id}`;
+    // const handleSubmit = () => {
+    //     const method = isEdit ? 'PUT' : 'POST';
+    //     const url = `/api/dashboard/${params.id}`;
 
-        fetch(url, {
-            method,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ quantity, price }),
-        })
-            .then((res) => {
-                if (res.ok) {
-                    alert(`${isEdit ? 'Updated' : 'Added'} successfully!`);
-                    router.push(`/dashboard/${params.id}`);
-                } else {
-                    throw new Error('Submission failed');
-                }
-            })
-            .catch(() => alert('Failed to submit.'));
-    };
+    //     fetch(url, {
+    //         method,
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({ quantity, price }),
+    //     })
+    //         .then((res) => {
+    //             if (res.ok) {
+    //                 alert(`${isEdit ? 'Updated' : 'Added'} successfully!`);
+    //                 router.push(`/dashboard/${params.id}`);
+    //             } else {
+    //                 throw new Error('Submission failed');
+    //             }
+    //         })
+    //         .catch(() => alert('Failed to submit.'));
+    // };
 
     if (!itemDetails) {
         return <div>Loading item details...</div>;

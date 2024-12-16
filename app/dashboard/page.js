@@ -42,9 +42,9 @@ export default function DashboardPage() {
         }
     }, [searchTerm, data]);
 
-    const handleQuantityChange = (id, value) => {
-        setQuantities((prev) => ({ ...prev, [id]: value }));
-    };
+    // const handleQuantityChange = (id, value) => {
+    //     setQuantities((prev) => ({ ...prev, [id]: value }));
+    // };
 
     return (
         <div className="dashboard-container">
